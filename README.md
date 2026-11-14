@@ -31,8 +31,20 @@ A high-fidelity, interactive engineering simulation of a single-cylinder four-st
 - **Interactive Engineering Quiz**:
   - Multiple-choice theory assessment and real-time stroke identification reflex challenge.
 
-- **Multilingual Support**:
-  - Interface available in 8 languages (English, Hindi, Spanish, French, German, Portuguese, Arabic, and Japanese).
+- **Comprehensive Multilingual Internationalization (i18n)**:
+  - 100% full-site localization across **8 international languages**:
+    - 🇬🇧 **English** (`en`)
+    - 🇮🇳 **हिन्दी - Hindi** (`hi`)
+    - 🇪🇸 **Español - Spanish** (`es`)
+    - 🇫🇷 **Français - French** (`fr`)
+    - 🇩🇪 **Deutsch - German** (`de`)
+    - 🇵🇹 **Português - Portuguese** (`pt`)
+    - 🇸🇦 **العربية - Arabic** (`ar` — with full bidirectional RTL layout and text orientation)
+    - 🇯🇵 **日本語 - Japanese** (`ja`)
+  - **Dynamic 60 FPS Telemetry Localization**: Stroke badges, real-time stroke explanations, ignition spark firing states, valve lift values, and piston direction indicators update dynamically in the selected language without English overwrite.
+  - **Component Inspector Translations**: Engineering definitions, functions, kinematics, and material specifications for all 17 primary components translated into every language.
+  - **Diagrams & Quiz System**: All diagram mode controls, engineering notes, quiz questions, interactive feedback, and challenge streak stats fully localized.
+  - **Session Persistence**: Language selection persists seamlessly across reloads and multi-page routing via `localStorage`.
 
 ---
 
