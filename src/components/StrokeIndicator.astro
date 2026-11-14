@@ -6,16 +6,16 @@
   <div class="cycle-track-container">
     <div class="cycle-track">
       <div class="stroke-segment seg-intake">
-        <span>1. INTAKE (0°-180°)</span>
+        <span data-i18n="seg_intake">1. INTAKE (0°-180°)</span>
       </div>
       <div class="stroke-segment seg-compression">
-        <span>2. COMPRESSION (180°-360°)</span>
+        <span data-i18n="seg_compression">2. COMPRESSION (180°-360°)</span>
       </div>
       <div class="stroke-segment seg-power">
-        <span>3. POWER (360°-540°)</span>
+        <span data-i18n="seg_power">3. POWER (360°-540°)</span>
       </div>
       <div class="stroke-segment seg-exhaust">
-        <span>4. EXHAUST (540°-720°)</span>
+        <span data-i18n="seg_exhaust">4. EXHAUST (540°-720°)</span>
       </div>
       <!-- Needle Cursor -->
       <div id="cycle-needle" class="cycle-needle" style="left: 0%;"></div>
@@ -25,12 +25,12 @@
   <div class="stroke-status-content">
     <div class="stroke-badge-col">
       <div class="current-stroke-wrap">
-        <span class="sub-label">CURRENT STROKE:</span>
-        <div id="stroke-name-badge" class="badge badge-intake stroke-large-badge">
+        <span class="sub-label" data-i18n="current_stroke_lbl">CURRENT STROKE:</span>
+        <div id="stroke-name-badge" class="badge badge-intake stroke-large-badge" data-i18n="stroke_1">
           1. INTAKE (SUCTION)
         </div>
       </div>
-      <p id="stroke-dynamic-desc" class="stroke-desc">
+      <p id="stroke-dynamic-desc" class="stroke-desc" data-i18n="stroke_intake_desc">
         Piston is moving downward from TDC to BDC creating internal depression; fresh air-fuel mixture is entering through the open intake valve.
       </p>
     </div>
@@ -38,7 +38,7 @@
     <div class="stroke-telemetry-col">
       <!-- Spark status -->
       <div class="mini-telemetry-box" id="box-spark-status">
-        <span class="mini-label">Ignition Spark</span>
+        <span class="mini-label" data-i18n="status_spark">Ignition Spark</span>
         <div class="mini-val-row">
           <span id="val-spark-dot" class="status-dot dot-inactive"></span>
           <span id="val-spark-text" class="mini-value">OFF</span>
@@ -47,7 +47,7 @@
 
       <!-- Inlet valve status -->
       <div class="mini-telemetry-box">
-        <span class="mini-label">Inlet Valve</span>
+        <span class="mini-label" data-i18n="status_intake">Inlet Valve</span>
         <div class="mini-val-row">
           <span id="val-intake-dot" class="status-dot dot-active"></span>
           <span id="val-intake-text" class="mini-value">OPEN (4.2 mm)</span>
@@ -56,7 +56,7 @@
 
       <!-- Exhaust valve status -->
       <div class="mini-telemetry-box">
-        <span class="mini-label">Exhaust Valve</span>
+        <span class="mini-label" data-i18n="status_exhaust">Exhaust Valve</span>
         <div class="mini-val-row">
           <span id="val-exhaust-dot" class="status-dot dot-inactive"></span>
           <span id="val-exhaust-text" class="mini-value">CLOSED (0.0 mm)</span>
@@ -65,7 +65,7 @@
 
       <!-- Piston direction -->
       <div class="mini-telemetry-box">
-        <span class="mini-label">Piston Motion</span>
+        <span class="mini-label" data-i18n="status_motion">Piston Motion</span>
         <div class="mini-val-row">
           <span id="val-piston-dir-icon">↓</span>
           <span id="val-piston-dir" class="mini-value">Down (TDC→BDC)</span>

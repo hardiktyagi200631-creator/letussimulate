@@ -72,6 +72,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://engine-s
       <slot />
     </main>
     <Footer />
+
+    <!-- Client-side hydration for multilingual switching, simulation, and telemetry -->
+    <script>
+      import '../scripts/client-app';
+    </script>
   </body>
 </html>
 

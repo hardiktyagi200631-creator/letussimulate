@@ -13,7 +13,7 @@
         <svg id="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
           <polygon points="5 3 19 12 5 21 5 3"></polygon>
         </svg>
-        <span id="label-play-pause">Pause</span>
+        <span id="label-play-pause" data-i18n="ctrl_pause">Pause</span>
       </button>
 
       <button id="btn-step-back" class="btn btn-outline" title="Single Step Backward (-10° Crank Angle)">
@@ -37,13 +37,13 @@
           <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
           <path d="M3 3v5h5"></path>
         </svg>
-        Reset TDC
+        <span data-i18n="ctrl_reset">Reset TDC</span>
       </button>
     </div>
 
     <!-- Speed multipliers -->
     <div class="speed-multiplier-group">
-      <span class="ctrl-subhead">Speed:</span>
+      <span class="ctrl-subhead" data-i18n="ctrl_speed">Speed:</span>
       <button class="btn btn-outline btn-sm speed-btn active" data-speed="0.1">0.1x</button>
       <button class="btn btn-outline btn-sm speed-btn" data-speed="0.25">0.25x</button>
       <button class="btn btn-outline btn-sm speed-btn" data-speed="0.5">0.5x</button>
@@ -55,15 +55,15 @@
   <div class="rpm-control-container">
     <div class="rpm-header">
       <div class="rpm-label-group">
-        <span class="ctrl-subhead">Engine Speed (RPM):</span>
+        <span class="ctrl-subhead" data-i18n="ctrl_rpm">Engine Speed (RPM):</span>
         <span id="rpm-display-badge" class="rpm-badge">1200 RPM</span>
       </div>
       <div class="rpm-presets">
-        <button class="rpm-preset-pill" data-rpm="600">600 (Idle)</button>
-        <button class="rpm-preset-pill active" data-rpm="1200">1200 (Low)</button>
-        <button class="rpm-preset-pill" data-rpm="2400">2400 (Cruise)</button>
-        <button class="rpm-preset-pill" data-rpm="4000">4000 (Power)</button>
-        <button class="rpm-preset-pill" data-rpm="6000">6000 (Max)</button>
+        <button class="rpm-preset-pill" data-rpm="600">600 (<span data-i18n="rpm_idle">Idle</span>)</button>
+        <button class="rpm-preset-pill active" data-rpm="1200">1200 (<span data-i18n="rpm_low">Low</span>)</button>
+        <button class="rpm-preset-pill" data-rpm="2400">2400 (<span data-i18n="rpm_cruise">Cruise</span>)</button>
+        <button class="rpm-preset-pill" data-rpm="4000">4000 (<span data-i18n="rpm_power">Power</span>)</button>
+        <button class="rpm-preset-pill" data-rpm="6000">6000 (<span data-i18n="rpm_max">Max</span>)</button>
       </div>
     </div>
     <div class="rpm-slider-track">

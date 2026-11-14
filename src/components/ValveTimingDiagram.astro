@@ -8,11 +8,11 @@
         <path d="M12 2v20"></path>
         <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
       </svg>
-      <span>Valve Timing Diagram (0° - 720° Cycle)</span>
+      <span data-i18n="vt_title">Valve Timing Diagram (0° - 720° Cycle)</span>
     </div>
     <div class="chart-controls">
-      <button class="btn btn-outline btn-sm vt-mode-btn active" data-mode="realistic">Realistic (Overlap)</button>
-      <button class="btn btn-outline btn-sm vt-mode-btn" data-mode="ideal">Ideal Boundaries</button>
+      <button class="btn btn-outline btn-sm vt-mode-btn active" data-mode="realistic" data-i18n="vt_mode_real">Realistic (Overlap)</button>
+      <button class="btn btn-outline btn-sm vt-mode-btn" data-mode="ideal" data-i18n="vt_mode_ideal">Ideal Boundaries</button>
     </div>
   </div>
 
@@ -22,8 +22,8 @@
 
   <div class="chart-footer-note">
     <span class="note-bullet">●</span>
-    <span class="note-text">
-      Green zone denotes <strong>Valve Overlap</strong> (IVO 12° BTDC to EVC 10° ATDC). Both valves remain briefly open simultaneously around TDC to scavenge exhaust gases and draw in fresh charge via inertia.
+    <span class="note-text" data-i18n="vt_note">
+      Green zone denotes Valve Overlap (IVO 12° BTDC to EVC 10° ATDC). Both valves remain briefly open simultaneously around TDC to scavenge exhaust gases and draw in fresh charge via inertia.
     </span>
   </div>
 </div>

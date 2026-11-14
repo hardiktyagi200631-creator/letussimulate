@@ -4,9 +4,9 @@
 <section id="quiz" class="quiz-section">
   <div class="container">
     <div class="section-header">
-      <span class="badge badge-power">Interactive Assessment</span>
-      <h2>Mechanical Engineering Knowledge & Challenge Quiz</h2>
-      <p class="section-subtitle">
+      <span class="badge badge-power" data-i18n="quiz_badge">Interactive Assessment</span>
+      <h2 data-i18n="quiz_title">Mechanical Engineering Knowledge & Challenge Quiz</h2>
+      <p class="section-subtitle" data-i18n="quiz_subtitle">
         Validate your understanding of four-stroke cycle kinematics, valve events, thermodynamics, and real-time stroke identification.
       </p>
     </div>
@@ -20,14 +20,14 @@
           <line x1="16" y1="13" x2="8" y2="13"></line>
           <line x1="16" y1="17" x2="8" y2="17"></line>
         </svg>
-        Theory & Calculation Quiz
+        <span data-i18n="quiz_tab_mcq">Theory & Calculation Quiz</span>
       </button>
 
       <button id="tab-quiz-challenge" class="quiz-tab-btn">
         <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
           <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
         </svg>
-        Live Stroke Identification Challenge
+        <span data-i18n="quiz_tab_challenge">Live Stroke Identification Challenge</span>
       </button>
     </div>
 
@@ -36,13 +36,13 @@
       <div class="quiz-meta-header">
         <span id="quiz-progress-text" class="quiz-progress">Question 1 of 10</span>
         <div class="quiz-score-badge">
-          <span>Score: </span>
+          <span data-i18n="quiz_score_prefix">Score: </span>
           <strong id="quiz-score-num">0</strong> / <span id="quiz-total-attempted">0</span>
         </div>
       </div>
 
       <div class="quiz-question-box">
-        <h3 id="quiz-question-text" class="quiz-question-title">Loading question...</h3>
+        <h3 id="quiz-question-text" class="quiz-question-title" data-i18n="quiz_loading">Loading question...</h3>
         <div id="quiz-options-list" class="quiz-options-container">
           <!-- Dynamically populated options -->
         </div>
@@ -54,47 +54,47 @@
       </div>
 
       <div class="quiz-action-bar">
-        <button id="btn-quiz-submit" class="btn btn-primary" disabled>Submit Answer</button>
-        <button id="btn-quiz-next" class="btn btn-outline" style="display: none;">Next Question →</button>
+        <button id="btn-quiz-submit" class="btn btn-primary" disabled data-i18n="quiz_submit">Submit Answer</button>
+        <button id="btn-quiz-next" class="btn btn-outline" style="display: none;" data-i18n="quiz_next">Next Question →</button>
       </div>
     </div>
 
     <!-- Mode 2: Real-time Stroke Identification Challenge -->
     <div id="view-quiz-challenge" class="eng-card challenge-container" style="display: none;">
       <div class="challenge-instructions">
-        <div class="challenge-tag">LIVE OBSERVATION CHALLENGE</div>
-        <h3>Identify the Current Stroke of the Running Engine</h3>
-        <p>
+        <div class="challenge-tag" data-i18n="quiz_ch_tag">LIVE OBSERVATION CHALLENGE</div>
+        <h3 data-i18n="quiz_ch_title">Identify the Current Stroke of the Running Engine</h3>
+        <p data-i18n="quiz_ch_desc">
           Observe the 3D model in real time. Look at the direction of piston motion (moving down vs moving up) and observe whether the intake or exhaust valve is open off its seat. Click the correct stroke below to test your reflexes and mechanical observation!
         </p>
       </div>
 
       <div class="challenge-score-bar">
         <div class="challenge-stat">
-          <span class="stat-lbl">Streak:</span>
+          <span class="stat-lbl" data-i18n="quiz_streak">Streak:</span>
           <span id="ch-streak" class="stat-val">0</span>
         </div>
         <div class="challenge-stat">
-          <span class="stat-lbl">Score:</span>
+          <span class="stat-lbl" data-i18n="quiz_score">Score:</span>
           <span id="ch-score" class="stat-val">0</span>
         </div>
         <div class="challenge-stat">
-          <span class="stat-lbl">Accuracy:</span>
+          <span class="stat-lbl" data-i18n="quiz_accuracy">Accuracy:</span>
           <span id="ch-accuracy" class="stat-val">100%</span>
         </div>
       </div>
 
       <div class="challenge-buttons-grid">
-        <button class="btn btn-outline ch-stroke-btn seg-intake" data-stroke="intake">
+        <button class="btn btn-outline ch-stroke-btn seg-intake" data-stroke="intake" data-i18n="ch_btn_intake">
           1. INTAKE (Piston ↓, Inlet Open)
         </button>
-        <button class="btn btn-outline ch-stroke-btn seg-compression" data-stroke="compression">
+        <button class="btn btn-outline ch-stroke-btn seg-compression" data-stroke="compression" data-i18n="ch_btn_compression">
           2. COMPRESSION (Piston ↑, Both Closed)
         </button>
-        <button class="btn btn-outline ch-stroke-btn seg-power" data-stroke="power">
+        <button class="btn btn-outline ch-stroke-btn seg-power" data-stroke="power" data-i18n="ch_btn_power">
           3. POWER (Piston ↓, Spark/Flame)
         </button>
-        <button class="btn btn-outline ch-stroke-btn seg-exhaust" data-stroke="exhaust">
+        <button class="btn btn-outline ch-stroke-btn seg-exhaust" data-stroke="exhaust" data-i18n="ch_btn_exhaust">
           4. EXHAUST (Piston ↑, Exhaust Open)
         </button>
       </div>

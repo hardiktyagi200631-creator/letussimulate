@@ -18,10 +18,10 @@ import QuizSection from '../components/QuizSection.astro';
   <section class="hero-section">
     <div class="container hero-content">
       <div class="hero-badge-row">
-        <span class="badge badge-intake">Single Cylinder SI Engine</span>
-        <span class="badge badge-power">Analytical Crank-Slider</span>
-        <span class="badge badge-compression">720° Four-Stroke Cycle</span>
-        <span class="badge badge-exhaust">Astro + Three.js</span>
+        <span class="badge badge-intake" data-i18n="badge_single_cylinder">Single Cylinder SI Engine</span>
+        <span class="badge badge-power" data-i18n="badge_crank_slider">Analytical Crank-Slider</span>
+        <span class="badge badge-compression" data-i18n="badge_cycle_720">720° Four-Stroke Cycle</span>
+        <span class="badge badge-exhaust" data-i18n="badge_tech_stack">Astro + Three.js</span>
       </div>
       <h1 class="hero-title" data-i18n="title">Four-Stroke Engine Simulator</h1>
       <p class="hero-subtitle" data-i18n="subtitle">
@@ -76,11 +76,6 @@ import QuizSection from '../components/QuizSection.astro';
   <!-- Interactive Knowledge & Stroke Identification Quiz -->
   <QuizSection />
 </MainLayout>
-
-<!-- Hydrate the Client Engine Application -->
-<script>
-  import '../scripts/client-app';
-</script>
 
 <style>
   .hero-section {

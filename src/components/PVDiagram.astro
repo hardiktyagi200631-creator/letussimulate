@@ -8,11 +8,11 @@
         <path d="M3 3v18h18"></path>
         <path d="M7 16c2-4 5-8 7-8s4 6 7 2"></path>
       </svg>
-      <span>Pressure - Volume (P-V) Indicator Diagram</span>
+      <span data-i18n="pv_title">Pressure - Volume (P-V) Indicator Diagram</span>
     </div>
     <div class="chart-controls">
-      <button class="btn btn-outline btn-sm pv-mode-btn active" data-mode="realistic">Actual Cycle</button>
-      <button class="btn btn-outline btn-sm pv-mode-btn" data-mode="ideal">Ideal Otto</button>
+      <button class="btn btn-outline btn-sm pv-mode-btn active" data-mode="realistic" data-i18n="pv_mode_real">Actual Cycle</button>
+      <button class="btn btn-outline btn-sm pv-mode-btn" data-mode="ideal" data-i18n="pv_mode_ideal">Ideal Otto</button>
     </div>
   </div>
 
@@ -22,9 +22,9 @@
 
   <div class="chart-footer-note">
     <span class="note-bullet">●</span>
-    <span class="note-text">
+    <span class="note-text" data-i18n="pv_note">
       The enclosed area inside the P-V loop represents the net indicated mechanical work per cycle:
-      <code>W = ∮ P · dV</code>. In actual engines, rounding at corners occurs due to finite flame speed, blowdown, and heat transfer.
+      W = ∮ P · dV. In actual engines, rounding at corners occurs due to finite flame speed, blowdown, and heat transfer.
     </span>
   </div>
 </div>

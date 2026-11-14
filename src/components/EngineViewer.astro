@@ -4,26 +4,26 @@
 <div class="viewer-wrapper eng-card">
   <div class="viewer-toolbar">
     <div class="toolbar-group">
-      <span class="toolbar-label">Camera:</span>
-      <button class="btn btn-outline btn-sm camera-btn active" data-view="isometric" title="Isometric View">Iso</button>
-      <button class="btn btn-outline btn-sm camera-btn" data-view="front" title="Front View (Crank-Slider Plane)">Front</button>
-      <button class="btn btn-outline btn-sm camera-btn" data-view="side" title="Side View">Side</button>
-      <button class="btn btn-outline btn-sm camera-btn" data-view="top" title="Top View (Valves/Cylinder Head)">Top</button>
-      <button class="btn btn-outline btn-sm camera-btn" data-view="reset" title="Reset Camera Position">Reset</button>
+      <span class="toolbar-label" data-i18n="ctrl_camera">Camera:</span>
+      <button class="btn btn-outline btn-sm camera-btn active" data-view="isometric" title="Isometric View" data-i18n="ctrl_view_iso">Iso</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="front" title="Front View (Crank-Slider Plane)" data-i18n="ctrl_view_front">Front</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="side" title="Side View" data-i18n="ctrl_view_side">Side</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="top" title="Top View (Valves/Cylinder Head)" data-i18n="ctrl_view_top">Top</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="reset" title="Reset Camera Position" data-i18n="ctrl_reset_view">Reset</button>
     </div>
 
     <div class="toolbar-group">
-      <span class="toolbar-label">Inspection:</span>
+      <span class="toolbar-label" data-i18n="ctrl_inspection">Inspection:</span>
       <button id="btn-toggle-transparent" class="btn btn-outline btn-sm" title="Toggle Transparent Engine Block">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
           <circle cx="12" cy="12" r="3"></circle>
         </svg>
-        Transparent
+        <span data-i18n="ctrl_transparent">Transparent</span>
       </button>
 
       <div class="slider-control" title="Exploded Assembly View">
-        <label for="exploded-slider" class="slider-label">Explode:</label>
+        <label for="exploded-slider" class="slider-label" data-i18n="ctrl_exploded">Explode:</label>
         <input type="range" id="exploded-slider" min="0" max="100" value="0" class="eng-range" />
         <span id="exploded-val" class="slider-val">0%</span>
       </div>
@@ -39,16 +39,16 @@
   <div id="webgl-container" class="webgl-canvas-container">
     <div id="loading-overlay" class="loading-overlay">
       <div class="spinner"></div>
-      <p class="loading-text">Initializing 3D Mechanical Assembly...</p>
+      <p class="loading-text" data-i18n="viewer_loading">Initializing 3D Mechanical Assembly...</p>
     </div>
 
     <div id="webgl-error" class="webgl-error" style="display: none;">
-      <h4>WebGL Not Supported</h4>
-      <p>Your browser does not support WebGL hardware acceleration. The mathematical calculations and theory remain fully functional below.</p>
+      <h4 data-i18n="webgl_not_supported">WebGL Not Supported</h4>
+      <p data-i18n="webgl_not_supported_desc">Your browser does not support WebGL hardware acceleration. The mathematical calculations and theory remain fully functional below.</p>
     </div>
 
     <div class="viewer-hint">
-      <span>Drag: Rotate • Right-Click: Pan • Scroll: Zoom • Click Component: Inspect</span>
+      <span data-i18n="viewer_hint">Drag: Rotate • Right-Click: Pan • Scroll: Zoom • Click Component: Inspect</span>
     </div>
   </div>
 </div>

@@ -85,20 +85,31 @@ export function initEngineApp(): void {
     }
   }
 
+  // Multilingual State Initialization
+  let currentLang: LanguageCode = 'en';
+  try {
+    const saved = localStorage.getItem('engine_sim_lang') as LanguageCode | null;
+    if (saved && TRANSLATIONS[saved]) {
+      currentLang = saved;
+    }
+  } catch {}
+
   // Fallback animation loop for standalone diagrams or when WebGL is unavailable
   if (!scene) {
-    let lastTime = performance.now();
-    const fallbackTick = (timestamp: number) => {
-      const dt = Math.min(0.1, (timestamp - lastTime) / 1000);
-      lastTime = timestamp;
-      simulation.tick(dt);
-      const state = simulation.getCurrentState();
-      updateTelemetryDOM(state);
-      if (pvChart) pvChart.updateState(state);
-      if (vtChart) vtChart.updateState(state);
+    if (pvCanvas || vtCanvas || document.getElementById('tel-crank-angle')) {
+      let lastTime = performance.now();
+      const fallbackTick = (timestamp: number) => {
+        const dt = Math.min(0.1, (timestamp - lastTime) / 1000);
+        lastTime = timestamp;
+        simulation.tick(dt);
+        const state = simulation.getCurrentState();
+        updateTelemetryDOM(state);
+        if (pvChart) pvChart.updateState(state);
+        if (vtChart) vtChart.updateState(state);
+        requestAnimationFrame(fallbackTick);
+      };
       requestAnimationFrame(fallbackTick);
-    };
-    requestAnimationFrame(fallbackTick);
+    }
   }
 
   // 4. DOM Elements for Telemetry
@@ -146,6 +157,8 @@ export function initEngineApp(): void {
     if (elPower) elPower.textContent = `${thermo.brakePowerKw.toFixed(2)}`;
     if (elTorque) elTorque.textContent = thermo.brakeTorqueNm.toFixed(2);
 
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
+
     // Timeline Needle
     if (elCycleNeedle) {
       const pct = (kinematics.thetaDeg / 720) * 100;
@@ -157,35 +170,27 @@ export function initEngineApp(): void {
       const badges = ['badge-intake', 'badge-compression', 'badge-power', 'badge-exhaust'];
       badges.forEach((b) => elStrokeBadge.classList.remove(b));
       elStrokeBadge.classList.add(`badge-${cycle.stroke}`);
-      elStrokeBadge.textContent = `${cycle.strokeIndex}. ${cycle.strokeName.toUpperCase()}`;
+      const strokeKey = `stroke_${cycle.strokeIndex}`;
+      const strokeName = dict[strokeKey] || `${cycle.strokeIndex}. ${cycle.strokeName.toUpperCase()}`;
+      elStrokeBadge.textContent = strokeName;
     }
 
     // Stroke dynamic explanation
     if (elStrokeDesc) {
-      if (cycle.stroke === 'intake') {
-        elStrokeDesc.textContent =
-          'Piston moves downward from TDC to BDC creating internal depression; fresh air-fuel mixture enters through the open inlet valve.';
-      } else if (cycle.stroke === 'compression') {
-        elStrokeDesc.textContent =
-          'Both valves remain tightly sealed; upward moving piston compresses air-fuel mixture, dramatically raising pressure and temperature. Spark fires near TDC.';
-      } else if (cycle.stroke === 'power') {
-        elStrokeDesc.textContent =
-          'Combustion flame releases high gas pressure driving the piston downward with immense force, transferring positive torque to the crankshaft.';
-      } else {
-        elStrokeDesc.textContent =
-          'Exhaust valve opens; upward moving piston expels burnt combustion gases out through the exhaust port into the exhaust manifold.';
-      }
+      const descKey = `stroke_${cycle.stroke}_desc`;
+      elStrokeDesc.textContent = dict[descKey] || '';
     }
 
     // Spark Plug status
     if (elSparkDot && elSparkText) {
       if (cycle.isSparkActive) {
         elSparkDot.className = 'status-dot dot-spark';
-        elSparkText.textContent = `FIRING (${(cycle.sparkIntensity * 100).toFixed(0)}%)`;
+        const firingText = dict.val_firing || 'FIRING';
+        elSparkText.textContent = `${firingText} (${(cycle.sparkIntensity * 100).toFixed(0)}%)`;
         elSparkText.style.color = '#67e8f9';
       } else {
         elSparkDot.className = 'status-dot dot-inactive';
-        elSparkText.textContent = 'OFF';
+        elSparkText.textContent = dict.val_off || 'OFF';
         elSparkText.style.color = 'var(--text-main)';
       }
     }
@@ -194,10 +199,12 @@ export function initEngineApp(): void {
     if (elIntakeDot && elIntakeText) {
       if (valves.isIntakeOpen) {
         elIntakeDot.className = 'status-dot dot-active';
-        elIntakeText.textContent = `OPEN (${valves.intakeLift.toFixed(1)} mm)`;
+        const openText = dict.val_open || 'OPEN';
+        elIntakeText.textContent = `${openText} (${valves.intakeLift.toFixed(1)} mm)`;
       } else {
         elIntakeDot.className = 'status-dot dot-inactive';
-        elIntakeText.textContent = 'SEATED (0.0 mm)';
+        const seatedText = dict.val_seated || 'SEATED';
+        elIntakeText.textContent = `${seatedText} (0.0 mm)`;
       }
     }
 
@@ -205,23 +212,25 @@ export function initEngineApp(): void {
     if (elExhaustDot && elExhaustText) {
       if (valves.isExhaustOpen) {
         elExhaustDot.className = 'status-dot dot-active';
-        elExhaustText.textContent = `OPEN (${valves.exhaustLift.toFixed(1)} mm)`;
+        const openText = dict.val_open || 'OPEN';
+        elExhaustText.textContent = `${openText} (${valves.exhaustLift.toFixed(1)} mm)`;
       } else {
         elExhaustDot.className = 'status-dot dot-inactive';
-        elExhaustText.textContent = 'SEATED (0.0 mm)';
+        const seatedText = dict.val_seated || 'SEATED';
+        elExhaustText.textContent = `${seatedText} (0.0 mm)`;
       }
     }
 
     // Piston Direction
     if (elPistonDir && elPistonDirIcon) {
       if (Math.abs(kinematics.velocity) < 0.05) {
-        elPistonDir.textContent = 'At Dead Centre';
+        elPistonDir.textContent = dict.piston_dead_centre || 'At Dead Centre';
         elPistonDirIcon.textContent = '⏸';
       } else if (kinematics.velocity > 0) {
-        elPistonDir.textContent = 'Down (TDC→BDC)';
+        elPistonDir.textContent = dict.piston_down || 'Down (TDC→BDC)';
         elPistonDirIcon.textContent = '↓';
       } else {
-        elPistonDir.textContent = 'Up (BDC→TDC)';
+        elPistonDir.textContent = dict.piston_up || 'Up (BDC→TDC)';
         elPistonDirIcon.textContent = '↑';
       }
     }
@@ -234,14 +243,15 @@ export function initEngineApp(): void {
   const labelPlayPause = document.getElementById('label-play-pause');
 
   function updatePlayPauseBtn(isPlaying: boolean): void {
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
     if (isPlaying) {
       if (iconPause) iconPause.style.display = 'block';
       if (iconPlay) iconPlay.style.display = 'none';
-      if (labelPlayPause) labelPlayPause.textContent = 'Pause';
+      if (labelPlayPause) labelPlayPause.textContent = dict.ctrl_pause || 'Pause';
     } else {
       if (iconPause) iconPause.style.display = 'none';
       if (iconPlay) iconPlay.style.display = 'block';
-      if (labelPlayPause) labelPlayPause.textContent = 'Start';
+      if (labelPlayPause) labelPlayPause.textContent = dict.ctrl_start || 'Start';
     }
   }
 
@@ -382,8 +392,9 @@ export function initEngineApp(): void {
   function updateInspector(componentId: string | null): void {
     activeComponentId = componentId;
     isIsolated = false;
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
     if (btnIsolateComp) {
-      btnIsolateComp.textContent = 'Isolate Component';
+      btnIsolateComp.textContent = dict.ctrl_isolate || 'Isolate Component';
       btnIsolateComp.classList.remove('btn-active');
     }
 
@@ -401,24 +412,34 @@ export function initEngineApp(): void {
     if (btnIsolateComp) btnIsolateComp.style.display = 'inline-flex';
     if (btnClearSelection) btnClearSelection.style.display = 'inline-flex';
 
-    if (compName) compName.textContent = info.name;
-    if (compCategory) compCategory.textContent = info.category.toUpperCase();
-    if (compDef) compDef.textContent = info.definition;
-    if (compFunc) compFunc.textContent = info.function;
-    if (compMove) compMove.textContent = info.movement;
-    if (compMat) compMat.textContent = `${info.material} (${info.specifications})`;
+    const compKey = `comp_${componentId}`;
+    const nameText = dict[compKey] || info.name;
+    const catKey = `cat_${info.category}`;
+    const catText = dict[catKey] || info.category.toUpperCase();
+    const defText = dict[`${compKey}_def`] || info.definition;
+    const funcText = dict[`${compKey}_func`] || info.function;
+    const moveText = dict[`${compKey}_move`] || info.movement;
+    const matText = dict[`${compKey}_mat`] || `${info.material} (${info.specifications})`;
+
+    if (compName) compName.textContent = nameText;
+    if (compCategory) compCategory.textContent = catText;
+    if (compDef) compDef.textContent = defText;
+    if (compFunc) compFunc.textContent = funcText;
+    if (compMove) compMove.textContent = moveText;
+    if (compMat) compMat.textContent = matText;
   }
 
   if (btnIsolateComp && scene) {
     btnIsolateComp.addEventListener('click', () => {
       isIsolated = !isIsolated;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
       if (isIsolated) {
         scene.model.isolateComponent(activeComponentId);
-        btnIsolateComp.textContent = 'Restore Assembly';
+        btnIsolateComp.textContent = dict.ctrl_restore || 'Restore Assembly';
         btnIsolateComp.classList.add('btn-active');
       } else {
         scene.model.isolateComponent(null);
-        btnIsolateComp.textContent = 'Isolate Component';
+        btnIsolateComp.textContent = dict.ctrl_isolate || 'Isolate Component';
         btnIsolateComp.classList.remove('btn-active');
       }
     });
@@ -483,29 +504,40 @@ export function initEngineApp(): void {
   const btnQuizNext = document.getElementById('btn-quiz-next');
 
   function renderQuizQuestion(index: number): void {
+    const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
     if (index >= QUIZ_QUESTIONS.length) {
       if (quizQuestionText) {
-        quizQuestionText.textContent = `Quiz Complete! You scored ${quizScore} out of ${QUIZ_QUESTIONS.length}.`;
+        const compl = dict.quiz_complete || 'Quiz Complete! You scored';
+        const ofStr = dict.quiz_progress_of || 'of';
+        quizQuestionText.textContent = `${compl} ${quizScore} ${ofStr} ${QUIZ_QUESTIONS.length}.`;
       }
       if (quizOptionsList) quizOptionsList.innerHTML = '';
       if (btnQuizSubmit) btnQuizSubmit.style.display = 'none';
       if (btnQuizNext) {
         btnQuizNext.style.display = 'inline-flex';
-        btnQuizNext.textContent = 'Restart Quiz ↺';
+        btnQuizNext.textContent = dict.quiz_restart || 'Restart Quiz ↺';
       }
       return;
     }
 
     selectedOptionIndex = null;
     const q = QUIZ_QUESTIONS[index];
-    if (quizProgress) quizProgress.textContent = `Question ${index + 1} of ${QUIZ_QUESTIONS.length}`;
+    if (quizProgress) {
+      const qPrefix = dict.quiz_progress_prefix || 'Question';
+      const ofStr = dict.quiz_progress_of || 'of';
+      quizProgress.textContent = `${qPrefix} ${index + 1} ${ofStr} ${QUIZ_QUESTIONS.length}`;
+    }
     if (quizQuestionText) quizQuestionText.textContent = q.question;
     if (quizFeedbackBox) quizFeedbackBox.style.display = 'none';
     if (btnQuizSubmit) {
       btnQuizSubmit.style.display = 'inline-flex';
       btnQuizSubmit.disabled = true;
+      btnQuizSubmit.textContent = dict.quiz_submit || 'Submit Answer';
     }
-    if (btnQuizNext) btnQuizNext.style.display = 'none';
+    if (btnQuizNext) {
+      btnQuizNext.style.display = 'none';
+      btnQuizNext.textContent = dict.quiz_next || 'Next Question →';
+    }
 
     if (quizOptionsList) {
       quizOptionsList.innerHTML = '';
@@ -532,6 +564,7 @@ export function initEngineApp(): void {
       if (selectedOptionIndex === null) return;
       const q = QUIZ_QUESTIONS[currentQuizIndex];
       const isCorrect = selectedOptionIndex === q.correctIndex;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
 
       if (isCorrect) quizScore++;
       if (quizScoreNum) quizScoreNum.textContent = quizScore.toString();
@@ -551,16 +584,19 @@ export function initEngineApp(): void {
         quizFeedbackBox.style.display = 'flex';
         if (isCorrect) {
           quizFeedbackHeader.className = 'feedback-badge correct';
-          quizFeedbackHeader.textContent = 'Correct Answer!';
+          quizFeedbackHeader.textContent = dict.quiz_correct_badge || 'Correct Answer!';
         } else {
           quizFeedbackHeader.className = 'feedback-badge incorrect';
-          quizFeedbackHeader.textContent = 'Incorrect Answer';
+          quizFeedbackHeader.textContent = dict.quiz_incorrect_badge || 'Incorrect Answer';
         }
         quizFeedbackText.textContent = q.explanation;
       }
 
       btnQuizSubmit.style.display = 'none';
-      if (btnQuizNext) btnQuizNext.style.display = 'inline-flex';
+      if (btnQuizNext) {
+        btnQuizNext.style.display = 'inline-flex';
+        btnQuizNext.textContent = dict.quiz_next || 'Next Question →';
+      }
     });
   }
 
@@ -600,6 +636,7 @@ export function initEngineApp(): void {
       const curState = simulation.getCurrentState();
       const actualStroke = curState.cycle.stroke;
       chAttempts++;
+      const dict = TRANSLATIONS[currentLang] || TRANSLATIONS.en;
 
       if (guessedStroke === actualStroke) {
         chStreak++;
@@ -608,7 +645,8 @@ export function initEngineApp(): void {
           chFeedbackEl.className = 'challenge-feedback correct';
           chFeedbackEl.style.display = 'flex';
           chFeedbackIcon.textContent = '✓';
-          chFeedbackMsg.textContent = `Spot on! Piston direction and valve state indicate ${actualStroke.toUpperCase()} stroke. (+${100 * chStreak} pts)`;
+          const strokeName = dict[`stroke_${actualStroke}`] || actualStroke.toUpperCase();
+          chFeedbackMsg.textContent = `${dict.ch_correct || 'Spot on!'} (${strokeName}, +${100 * chStreak} pts)`;
         }
       } else {
         chStreak = 0;
@@ -616,7 +654,8 @@ export function initEngineApp(): void {
           chFeedbackEl.className = 'challenge-feedback incorrect';
           chFeedbackEl.style.display = 'flex';
           chFeedbackIcon.textContent = '✗';
-          chFeedbackMsg.textContent = `Incorrect: The engine is currently in the ${actualStroke.toUpperCase()} stroke. Watch the valve lift!`;
+          const strokeName = dict[`stroke_${actualStroke}`] || actualStroke.toUpperCase();
+          chFeedbackMsg.textContent = `${dict.ch_incorrect || 'Incorrect:'} (${strokeName})`;
         }
       }
 
@@ -654,6 +693,7 @@ export function initEngineApp(): void {
   // 10. Multilingual Selector Handler
   const langSelect = document.getElementById('language-select') as HTMLSelectElement | null;
   if (langSelect) {
+    langSelect.value = currentLang;
     langSelect.addEventListener('change', () => {
       const lang = langSelect.value as LanguageCode;
       applyLanguage(lang);
@@ -661,9 +701,19 @@ export function initEngineApp(): void {
   }
 
   function applyLanguage(lang: LanguageCode): void {
+    if (!TRANSLATIONS[lang]) lang = 'en';
+    currentLang = lang;
+    try {
+      localStorage.setItem('engine_sim_lang', lang);
+    } catch {}
+
     const dict = TRANSLATIONS[lang] || TRANSLATIONS.en;
     document.documentElement.lang = lang;
     document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+    if (langSelect && langSelect.value !== lang) {
+      langSelect.value = lang;
+    }
 
     document.querySelectorAll('[data-i18n]').forEach((el) => {
       const key = (el as HTMLElement).dataset.i18n;
@@ -671,7 +721,17 @@ export function initEngineApp(): void {
         el.textContent = dict[key];
       }
     });
+
+    updatePlayPauseBtn(simulation.isRunning());
+    if (activeComponentId) {
+      updateInspector(activeComponentId);
+    }
+    updateTelemetryDOM(simulation.getCurrentState());
+    renderQuizQuestion(currentQuizIndex);
   }
+
+  // Apply active/saved language across all DOM elements immediately
+  applyLanguage(currentLang);
 
   // 11. Keyboard Shortcuts
   window.addEventListener('keydown', (e) => {
