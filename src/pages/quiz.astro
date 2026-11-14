@@ -1,0 +1,40 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import QuizSection from '../components/QuizSection.astro';
+---
+
+<MainLayout
+  title="Engine Engineering Quiz & Stroke Challenge - Interactive Assessment"
+  description="Test your internal combustion engine engineering knowledge with multiple choice questions, true/false, kinematic calculations, and live stroke identification challenge."
+>
+  <div class="container page-header">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <span>Quiz</span>
+    </div>
+    <h1 style="margin-top: 0.5rem;">Four-Stroke IC Engine Engineering Assessment</h1>
+    <p style="color: var(--text-muted); max-width: 720px; margin-top: 0.5rem;">
+      Evaluate your understanding of crank-slider kinematics, valve timing, Otto cycle thermodynamics, and component functions with instant feedback.
+    </p>
+  </div>
+
+  <QuizSection />
+</MainLayout>
+
+<!-- Hydrate the Quiz Engine -->
+<script>
+  import '../scripts/client-app';
+</script>
+
+<style>
+  .page-header {
+    padding: 2.5rem 1.25rem 0.5rem;
+  }
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .breadcrumb a {
+    color: var(--accent-cyan);
+  }
+</style>
+

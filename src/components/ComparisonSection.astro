@@ -1,0 +1,235 @@
+---
+---
+
+<section id="comparison" class="comparison-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-power">Thermodynamic Comparison</span>
+      <h2>Petrol (Spark Ignition) vs Diesel (Compression Ignition)</h2>
+      <p class="section-subtitle">
+        A fundamental mechanical engineering comparison of operating cycles, ignition principles, and combustion dynamics.
+      </p>
+    </div>
+
+    <!-- Interactive Comparison Cards -->
+    <div class="grid-2" style="margin-bottom: 2rem;">
+      <div class="eng-card comp-card petrol-card">
+        <div class="comp-card-badge">PETROL / GASOLINE (SI)</div>
+        <h3 class="comp-engine-title">Four-Stroke Spark Ignition (Otto Cycle)</h3>
+        <ul class="comp-feature-list">
+          <li><strong>Fuel Type:</strong> Petrol / Gasoline (volatile, high octane rating ~91–98 RON, resists pre-ignition).</li>
+          <li><strong>Intake Charge:</strong> Homogeneous mixture of air and vaporized fuel drawn into cylinder during intake.</li>
+          <li><strong>Compression Ratio:</strong> Moderate (r = 8.0:1 to 11.5:1) limited strictly by fuel knock / auto-ignition.</li>
+          <li><strong>Ignition Mechanism:</strong> Electric discharge arc from a spark plug near TDC (20,000–30,000 V).</li>
+          <li><strong>Combustion Model:</strong> Approximately constant-volume heat addition (V &approx; constant).</li>
+          <li><strong>Load Governing:</strong> Quantity governing via throttle plate regulating total intake mixture mass.</li>
+          <li><strong>Thermal Efficiency:</strong> Moderate indicated efficiency (&eta; &approx; 28% - 35%).</li>
+        </ul>
+      </div>
+
+      <div class="eng-card comp-card diesel-card">
+        <div class="comp-card-badge diesel-badge">DIESEL (CI)</div>
+        <h3 class="comp-engine-title">Four-Stroke Compression Ignition (Diesel Cycle)</h3>
+        <ul class="comp-feature-list">
+          <li><strong>Fuel Type:</strong> Diesel fuel (heavier hydrocarbon distillates, high cetane rating ~45–55 for quick auto-ignition).</li>
+          <li><strong>Intake Charge:</strong> Pure ambient air only is inducted; fuel is never present during intake or compression.</li>
+          <li><strong>Compression Ratio:</strong> High (r = 15.0:1 to 22.0:1), producing air temperatures exceeding 600 °C at TDC.</li>
+          <li><strong>Ignition Mechanism:</strong> Self-ignition (Compression Ignition) when atomized fuel is injected into hot air (no spark plug).</li>
+          <li><strong>Combustion Model:</strong> Approximately constant-pressure heat addition (P &approx; constant or Dual cycle).</li>
+          <li><strong>Load Governing:</strong> Quality governing (unthrottled air intake; fuel mass injected varies with load).</li>
+          <li><strong>Thermal Efficiency:</strong> High indicated efficiency (&eta; &approx; 38% - 46%) due to higher compression ratio.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Detailed Specification Table -->
+    <div class="eng-card table-card">
+      <div class="eng-card-header">
+        <span class="eng-card-title">Comprehensive Engineering Comparison Matrix</span>
+        <span class="badge badge-intake">10 Technical Dimensions</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="eng-table">
+          <thead>
+            <tr>
+              <th>Technical Parameter</th>
+              <th>Petrol (Spark Ignition) Engine</th>
+              <th>Diesel (Compression Ignition) Engine</th>
+              <th>Engineering Reason / Justification</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Working Cycle</strong></td>
+              <td>Otto Cycle (Constant-Volume)</td>
+              <td>Diesel / Dual Combustion Cycle</td>
+              <td>Rapid flame propagation in petrol allows near-instantaneous heat addition at TDC.</td>
+            </tr>
+            <tr>
+              <td><strong>Ignition Method</strong></td>
+              <td>Spark Plug Electric Arc</td>
+              <td>Compression Heat Auto-ignition</td>
+              <td>Diesel auto-ignition temperature is lower (~210 °C) and is reached by high compression of air.</td>
+            </tr>
+            <tr>
+              <td><strong>Compression Ratio (CR)</strong></td>
+              <td>8:1 to 11.5:1</td>
+              <td>15:1 to 22:1</td>
+              <td>Higher CR in petrol causes destructive detonation (knocking). Diesel requires high CR to exceed self-ignition temp.</td>
+            </tr>
+            <tr>
+              <td><strong>Air Intake Mechanism</strong></td>
+              <td>Throttled air-fuel mixture</td>
+              <td>Unthrottled pure ambient air</td>
+              <td>Petrol requires near stoichiometric air-fuel ratio (~14.7:1); diesel runs lean across all operating loads.</td>
+            </tr>
+            <tr>
+              <td><strong>Fuel Injection Pressure</strong></td>
+              <td>3 to 200 bar (PFI to GDI)</td>
+              <td>1,500 to 2,500 bar (Common Rail)</td>
+              <td>Diesel must atomize micro-droplets instantly into high-density compressed air at end of stroke.</td>
+            </tr>
+            <tr>
+              <td><strong>Peak Cylinder Pressure</strong></td>
+              <td>45 to 70 bar</td>
+              <td>120 to 190 bar</td>
+              <td>Diesel operates under much higher compression and combustion pressures, requiring heavier structures.</td>
+            </tr>
+            <tr>
+              <td><strong>Engine Weight-to-Power</strong></td>
+              <td>Low (lightweight aluminium)</td>
+              <td>Higher (reinforced block & crank)</td>
+              <td>Diesel engine block, connecting rods, and crankshaft must endure 2.5× higher structural shock loads.</td>
+            </tr>
+            <tr>
+              <td><strong>Rotational Speed (RPM)</strong></td>
+              <td>High (typically 4,000–8,000 RPM)</td>
+              <td>Moderate (typically 1,800–4,500 RPM)</td>
+              <td>Heavy reciprocating parts and slower diesel combustion diffusion limit maximum engine rotational speed.</td>
+            </tr>
+            <tr>
+              <td><strong>Brake Thermal Efficiency</strong></td>
+              <td>25% to 35%</td>
+              <td>35% to 46%</td>
+              <td>Diesel thermal efficiency is higher because higher compression ratio directly yields greater expansion ratio.</td>
+            </tr>
+            <tr>
+              <td><strong>Primary Applications</strong></td>
+              <td>Passenger cars, motorbikes, small aircraft</td>
+              <td>Commercial trucks, buses, ships, locomotives, generators</td>
+              <td>Petrol favors high power-to-weight and smooth acceleration; diesel favors high low-end torque and fuel economy.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comparison-section {
+    padding: 3rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 700px;
+    margin: 0.5rem auto 0;
+  }
+
+  .comp-card {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .petrol-card {
+    border-color: rgba(56, 189, 248, 0.4);
+    background: linear-gradient(180deg, rgba(56, 189, 248, 0.05) 0%, rgba(15, 23, 42, 0.6) 100%);
+  }
+
+  .diesel-card {
+    border-color: rgba(245, 158, 11, 0.4);
+    background: linear-gradient(180deg, rgba(245, 158, 11, 0.05) 0%, rgba(15, 23, 42, 0.6) 100%);
+  }
+
+  .comp-card-badge {
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--accent-cyan);
+    letter-spacing: 0.08em;
+  }
+
+  .diesel-badge {
+    color: var(--accent-amber);
+  }
+
+  .comp-engine-title {
+    font-size: 1.15rem;
+    color: var(--text-main);
+  }
+
+  .comp-feature-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .comp-feature-list li strong {
+    color: var(--text-main);
+  }
+
+  .table-card {
+    padding: 1.25rem;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .eng-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    text-align: left;
+  }
+
+  .eng-table th {
+    background: var(--bg-surface);
+    color: var(--text-main);
+    padding: 0.75rem 0.9rem;
+    font-weight: 600;
+    border-bottom: 2px solid var(--border-color);
+    white-space: nowrap;
+  }
+
+  .eng-table td {
+    padding: 0.75rem 0.9rem;
+    border-bottom: 1px solid var(--border-subtle);
+    color: var(--text-muted);
+    vertical-align: top;
+  }
+
+  .eng-table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .eng-table td strong {
+    color: var(--text-main);
+  }
+</style>
+

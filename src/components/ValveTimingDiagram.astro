@@ -1,0 +1,75 @@
+---
+---
+
+<div class="eng-card">
+  <div class="eng-card-header">
+    <div class="eng-card-title">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 2v20"></path>
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      </svg>
+      <span>Valve Timing Diagram (0° - 720° Cycle)</span>
+    </div>
+    <div class="chart-controls">
+      <button class="btn btn-outline btn-sm vt-mode-btn active" data-mode="realistic">Realistic (Overlap)</button>
+      <button class="btn btn-outline btn-sm vt-mode-btn" data-mode="ideal">Ideal Boundaries</button>
+    </div>
+  </div>
+
+  <div class="chart-canvas-wrapper">
+    <canvas id="vt-canvas" width="600" height="340" class="eng-canvas"></canvas>
+  </div>
+
+  <div class="chart-footer-note">
+    <span class="note-bullet">●</span>
+    <span class="note-text">
+      Green zone denotes <strong>Valve Overlap</strong> (IVO 12° BTDC to EVC 10° ATDC). Both valves remain briefly open simultaneously around TDC to scavenge exhaust gases and draw in fresh charge via inertia.
+    </span>
+  </div>
+</div>
+
+<style>
+  .chart-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .vt-mode-btn.active {
+    background: var(--accent-cyan);
+    color: #04101e;
+    font-weight: 700;
+    border-color: var(--accent-cyan);
+  }
+
+  .chart-canvas-wrapper {
+    width: 100%;
+    position: relative;
+    background: #090d16;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+  }
+
+  .eng-canvas {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .chart-footer-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .note-bullet {
+    color: var(--accent-green);
+    font-size: 0.85rem;
+  }
+</style>
+

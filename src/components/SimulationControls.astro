@@ -1,0 +1,208 @@
+---
+---
+
+<div class="sim-controls eng-card">
+  <div class="controls-row">
+    <!-- Playback buttons -->
+    <div class="playback-btn-group">
+      <button id="btn-play-pause" class="btn btn-primary" title="Start / Pause Engine Simulation (Space)">
+        <svg id="icon-pause" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <rect x="6" y="4" width="4" height="16" rx="1"></rect>
+          <rect x="14" y="4" width="4" height="16" rx="1"></rect>
+        </svg>
+        <svg id="icon-play" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="display: none;">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <span id="label-play-pause">Pause</span>
+      </button>
+
+      <button id="btn-step-back" class="btn btn-outline" title="Single Step Backward (-10° Crank Angle)">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="19 20 9 12 19 4 19 20"></polygon>
+          <line x1="5" y1="19" x2="5" y2="5"></line>
+        </svg>
+        -10°
+      </button>
+
+      <button id="btn-step-fwd" class="btn btn-outline" title="Single Step Forward (+10° Crank Angle)">
+        +10°
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 4 15 12 5 20 5 4"></polygon>
+          <line x1="19" y1="5" x2="19" y2="19"></line>
+        </svg>
+      </button>
+
+      <button id="btn-reset" class="btn btn-outline" title="Reset Cycle to 0° (TDC Start of Intake)">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+          <path d="M3 3v5h5"></path>
+        </svg>
+        Reset TDC
+      </button>
+    </div>
+
+    <!-- Speed multipliers -->
+    <div class="speed-multiplier-group">
+      <span class="ctrl-subhead">Speed:</span>
+      <button class="btn btn-outline btn-sm speed-btn active" data-speed="0.1">0.1x</button>
+      <button class="btn btn-outline btn-sm speed-btn" data-speed="0.25">0.25x</button>
+      <button class="btn btn-outline btn-sm speed-btn" data-speed="0.5">0.5x</button>
+      <button class="btn btn-outline btn-sm speed-btn" data-speed="1.0">1.0x</button>
+      <button class="btn btn-outline btn-sm speed-btn" data-speed="2.0">2.0x</button>
+    </div>
+  </div>
+
+  <div class="rpm-control-container">
+    <div class="rpm-header">
+      <div class="rpm-label-group">
+        <span class="ctrl-subhead">Engine Speed (RPM):</span>
+        <span id="rpm-display-badge" class="rpm-badge">1200 RPM</span>
+      </div>
+      <div class="rpm-presets">
+        <button class="rpm-preset-pill" data-rpm="600">600 (Idle)</button>
+        <button class="rpm-preset-pill active" data-rpm="1200">1200 (Low)</button>
+        <button class="rpm-preset-pill" data-rpm="2400">2400 (Cruise)</button>
+        <button class="rpm-preset-pill" data-rpm="4000">4000 (Power)</button>
+        <button class="rpm-preset-pill" data-rpm="6000">6000 (Max)</button>
+      </div>
+    </div>
+    <div class="rpm-slider-track">
+      <span class="rpm-bound">300</span>
+      <input type="range" id="rpm-slider" min="300" max="6000" step="50" value="1200" class="rpm-slider" />
+      <span class="rpm-bound">6000</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .sim-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .controls-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .playback-btn-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .speed-multiplier-group {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: var(--bg-surface);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+  }
+
+  .ctrl-subhead {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .speed-btn.active {
+    background: var(--accent-cyan);
+    color: #04101e;
+    font-weight: 700;
+    border-color: var(--accent-cyan);
+  }
+
+  .rpm-control-container {
+    background: var(--bg-surface);
+    padding: 0.85rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .rpm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .rpm-label-group {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .rpm-badge {
+    background: rgba(56, 189, 248, 0.15);
+    color: var(--accent-cyan);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+
+  .rpm-presets {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .rpm-preset-pill {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .rpm-preset-pill:hover {
+    color: var(--text-main);
+    border-color: var(--accent-cyan);
+  }
+
+  .rpm-preset-pill.active {
+    background: rgba(56, 189, 248, 0.2);
+    border-color: var(--accent-cyan);
+    color: var(--accent-cyan);
+    font-weight: 600;
+  }
+
+  .rpm-slider-track {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .rpm-bound {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    font-family: var(--font-mono);
+  }
+
+  .rpm-slider {
+    flex: 1;
+    height: 6px;
+    accent-color: var(--accent-cyan);
+    cursor: pointer;
+  }
+</style>
+

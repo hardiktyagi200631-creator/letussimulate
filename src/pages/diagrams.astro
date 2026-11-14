@@ -1,0 +1,60 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import PVDiagram from '../components/PVDiagram.astro';
+import ValveTimingDiagram from '../components/ValveTimingDiagram.astro';
+---
+
+<MainLayout
+  title="Engine Diagrams: P-V Indicator & Valve Timing Diagram (0° - 720°)"
+  description="Interactive thermodynamic Pressure-Volume (P-V) diagrams and valve timing diagrams for four-stroke petrol engines. Compare ideal Otto cycle against indicated real cycle."
+>
+  <div class="container page-header">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <span>Diagrams</span>
+    </div>
+    <h1 style="margin-top: 0.5rem;">Thermodynamic & Valve Timing Diagrams</h1>
+    <p style="color: var(--text-muted); max-width: 720px; margin-top: 0.5rem;">
+      Analyze indicator diagrams, indicated net mechanical work loops, and cam lift distributions across the 720° cycle.
+    </p>
+  </div>
+
+  <div class="container" style="padding-bottom: 3.5rem;">
+    <div class="grid-2">
+      <PVDiagram />
+      <ValveTimingDiagram />
+    </div>
+
+    <!-- Technical Analysis Documentation -->
+    <div class="eng-card" style="margin-top: 2rem; padding: 1.75rem;">
+      <h3 style="color: var(--accent-cyan); margin-bottom: 0.75rem;">Thermodynamic P-V Loop Derivation</h3>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 1rem;">
+        The indicated work done per cycle (W_ind) is represented mathematically by the closed line integral over the complete 720° engine cycle:
+      </p>
+      <div style="background: var(--bg-surface); padding: 0.75rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.9rem; color: var(--accent-cyan); margin-bottom: 1rem;">
+        <code>W_net = &oint; P &middot; dV = &int; P_expansion dV - &int; P_compression dV - W_pumping</code>
+      </div>
+      <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+        The upper positive loop represents gross indicated work delivered to the piston during expansion minus compression work. The lower negative loop represents the pumping work required to exhaust burnt gases and draw in the fresh charge through the throttled intake manifold.
+      </p>
+    </div>
+  </div>
+</MainLayout>
+
+<!-- Hydrate charts if on standalone diagrams page -->
+<script>
+  import '../scripts/client-app';
+</script>
+
+<style>
+  .page-header {
+    padding: 2.5rem 1.25rem 1.5rem;
+  }
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .breadcrumb a {
+    color: var(--accent-cyan);
+  }
+</style>
+

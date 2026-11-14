@@ -1,0 +1,37 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import TheorySection from '../components/TheorySection.astro';
+import ErrorAnalysisSection from '../components/ErrorAnalysisSection.astro';
+---
+
+<MainLayout
+  title="Four-Stroke Engine Theory & Kinematic Calculations - Educational Syllabus"
+  description="Comprehensive mechanical engineering theory for four-stroke petrol engines: crank-slider kinematics, swept volume, compression ratio, indicated power, and thermodynamic efficiencies."
+>
+  <div class="container page-header">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <span>Theory</span>
+    </div>
+    <h1 style="margin-top: 0.5rem;">Internal Combustion Engine Engineering Theory</h1>
+    <p style="color: var(--text-muted); max-width: 700px; margin-top: 0.5rem;">
+      In-depth academic syllabus covering IC engine fundamentals, crank-slider derivations, dead centres, volumetric calculations, and thermal efficiencies.
+    </p>
+  </div>
+
+  <TheorySection />
+  <ErrorAnalysisSection />
+</MainLayout>
+
+<style>
+  .page-header {
+    padding: 2.5rem 1.25rem 1rem;
+  }
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .breadcrumb a {
+    color: var(--accent-cyan);
+  }
+</style>
+

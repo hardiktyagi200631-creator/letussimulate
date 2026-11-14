@@ -1,0 +1,211 @@
+---
+---
+
+<section id="theory" class="theory-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-intake">Educational Syllabus</span>
+      <h2>Engineering Theory: Four-Stroke Internal Combustion Engines</h2>
+      <p class="section-subtitle">
+        Comprehensive academic curriculum reference for mechanical engineering students, polytechnic diploma coursework, and technical study.
+      </p>
+    </div>
+
+    <div class="theory-grid">
+      <!-- 1. Fundamentals -->
+      <article class="eng-card theory-card">
+        <h3 class="theory-title">1. Fundamentals & Working Principle</h3>
+        <p>
+          An <strong>Internal Combustion (IC) Engine</strong> is a heat engine in which the combustion of fuel occurs directly within a confined space known as the combustion chamber. The chemical energy stored within the air-fuel mixture is released as thermal energy through rapid oxidation, which increases cylinder gas pressure and forces a movable piston to reciprocate, thereby producing mechanical work.
+        </p>
+        <p>
+          A <strong>Four-Stroke Engine</strong> completes one thermodynamic cycle across four distinct piston strokes corresponding to <strong>two full revolutions (720°)</strong> of the crankshaft. The four operational strokes occur in an invariant mechanical sequence: <em>Intake → Compression → Power (Expansion) → Exhaust</em>.
+        </p>
+      </article>
+
+      <!-- 2. Dead Centres & Engine Geometry -->
+      <article class="eng-card theory-card">
+        <h3 class="theory-title">2. Dead Centres & Geometric Parameters</h3>
+        <ul class="theory-list">
+          <li><strong>Top Dead Centre (TDC):</strong> The uppermost extreme position of the piston towards the cylinder head where cylinder volume is at its minimum (V = Vc) and instantaneous piston velocity is zero.</li>
+          <li><strong>Bottom Dead Centre (BDC):</strong> The lowest extreme position of the piston towards the crankcase where cylinder volume is at its maximum (V = Vc + Vs) and instantaneous piston velocity is zero.</li>
+          <li><strong>Cylinder Bore (D):</strong> The nominal internal diameter of the cylinder liner (D = 70 mm in this model).</li>
+          <li><strong>Piston Stroke (L or S):</strong> The linear distance traversed by the piston between TDC and BDC (L = 60 mm). Stroke is geometrically related to crank radius r by:
+            <div class="formula-box"><code>L = 2r &implies; r = L / 2 = 30 mm</code></div>
+          </li>
+        </ul>
+      </article>
+
+      <!-- 3. Engine Volumes & Compression Ratio -->
+      <article class="eng-card theory-card">
+        <h3 class="theory-title">3. Volumetric Calculations & Compression Ratio</h3>
+        <p>
+          The geometric capacity and compression characteristics of an IC engine are determined by fundamental volume formulas:
+        </p>
+        <div class="formula-box">
+          <code>Swept Volume: Vs = (&pi; / 4) &times; D&sup2; &times; L = (&pi; / 4) &times; (7.0 cm)&sup2; &times; 6.0 cm &approx; 230.91 cm&sup3; (cc)</code>
+        </div>
+        <div class="formula-box">
+          <code>Clearance Volume: Vc = Vs / (CR - 1) = 230.91 / (9 - 1) &approx; 28.86 cm&sup3; (cc)</code>
+        </div>
+        <div class="formula-box">
+          <code>Compression Ratio: CR = (Vs + Vc) / Vc = Vmax / Vmin = 9.0 : 1</code>
+        </div>
+      </article>
+
+      <!-- 4. Crank-Slider Kinematic Derivation -->
+      <article class="eng-card theory-card">
+        <h3 class="theory-title">4. Crank-Slider Kinematic Kinematics</h3>
+        <p>
+          The transformation of continuous rotary motion into reciprocating motion is modeled using the exact crank-slider mechanism equations rather than an unphysical sinusoidal approximation:
+        </p>
+        <div class="formula-box">
+          <code>Displacement: x(&theta;) = r(1 - cos &theta;) + l - &radic;(l&sup2; - r&sup2; sin&sup2; &theta;)</code>
+        </div>
+        <p>
+          Where r is crank radius (30 mm), l is connecting rod length (110 mm), and &theta; is crank angle from TDC.
+        </p>
+        <div class="formula-box">
+          <code>Velocity: v(&theta;) = &omega; &times; dx/d&theta; = &omega;r [ sin &theta; + (r sin 2&theta;) / (2 &radic;(l&sup2; - r&sup2; sin&sup2; &theta;)) ]</code>
+        </div>
+        <div class="formula-box">
+          <code>Mean Piston Speed: Cm = (2 &times; L &times; N) / 60   [m/s]</code>
+        </div>
+      </article>
+
+      <!-- 5. Valve Train & 2:1 Camshaft Reduction -->
+      <article class="eng-card theory-card">
+        <h3 class="theory-title">5. Camshaft & Crankshaft Relationship</h3>
+        <p>
+          Because each poppet valve (intake and exhaust) opens exactly once during the complete 720° four-stroke cycle, the camshaft must complete one revolution for every two revolutions of the crankshaft:
+        </p>
+        <div class="formula-box">
+          <code>N_cam = N_crank / 2   or   &theta;_cam = &theta;_crank / 2</code>
+        </div>
+        <p>
+          This is enforced physically via a 2:1 timing drive sprocket tooth ratio (e.g., 18 teeth on crankshaft sprocket, 36 teeth on camshaft sprocket).
+        </p>
+      </article>
+
+      <!-- 6. Engine Performance & Efficiencies -->
+      <article class="eng-card theory-card">
+        <h3 class="theory-title">6. Power, Torque & Efficiencies</h3>
+        <p>
+          Engine power and mechanical relationships are evaluated as:
+        </p>
+        <div class="formula-box">
+          <code>Brake Power: Pb = (2&pi; &times; N &times; T) / 60 &implies; T = (60 &times; Pb) / (2&pi; &times; N)</code>
+        </div>
+        <div class="formula-box">
+          <code>Indicated Power: Pi = (IMEP &times; L &times; A &times; N) / (60 &times; 2)</code>
+        </div>
+        <div class="formula-box">
+          <code>Mechanical Efficiency: &eta;m = Pb / Pi &approx; 80% - 88%</code>
+        </div>
+        <div class="formula-box">
+          <code>Ideal Otto Efficiency: &eta;_otto = 1 - 1 / (CR^(&gamma; - 1)) = 1 - 1 / (9.0^0.4) &approx; 58.5%</code>
+        </div>
+      </article>
+
+      <!-- 7. Advantages & Disadvantages -->
+      <article class="eng-card theory-card" style="grid-column: 1 / -1;">
+        <h3 class="theory-title">7. Advantages & Disadvantages of Four-Stroke Engines</h3>
+        <div class="grid-2">
+          <div>
+            <h4 style="color: var(--accent-green); margin-bottom: 0.5rem;">Advantages:</h4>
+            <ul class="theory-list">
+              <li><strong>Higher Thermal Efficiency:</strong> Distinct strokes for fresh intake and exhaust scavenging eliminate fuel short-circuiting into exhaust.</li>
+              <li><strong>Greater Volumetric Efficiency:</strong> Entire dedicated stroke for drawing fresh charge allows higher cylinder filling.</li>
+              <li><strong>Lower Emissions:</strong> No oil mixed with fuel in fuel tank (unlike two-stroke engines with crankcase scavenging).</li>
+              <li><strong>Wider Power Band:</strong> Flexible operational RPM range suitable for variable load vehicle transportation.</li>
+            </ul>
+          </div>
+          <div>
+            <h4 style="color: var(--accent-red); margin-bottom: 0.5rem;">Disadvantages:</h4>
+            <ul class="theory-list">
+              <li><strong>Lower Power Density:</strong> Only one power stroke every two revolutions (half the power stroke frequency of a 2-stroke engine of identical displacement).</li>
+              <li><strong>Mechanical Complexity:</strong> Requires poppet valves, camshaft, valve springs, guides, timing chain/belt, and lubrication galleys.</li>
+              <li><strong>Higher Weight & Cost:</strong> More components require precise machining, heat treatment, and assembly.</li>
+              <li><strong>Torque Fluctuation:</strong> Requires a heavy flywheel to smooth out rotation across non-power strokes in single-cylinder layouts.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .theory-section {
+    padding: 3rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 720px;
+    margin: 0.5rem auto 0;
+  }
+
+  .theory-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .theory-card {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .theory-title {
+    font-size: 1.1rem;
+    color: var(--accent-cyan);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .theory-list {
+    list-style: square inside;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .theory-list strong {
+    color: var(--text-main);
+  }
+
+  .formula-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 0.85rem;
+    margin: 0.4rem 0;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--accent-cyan);
+    overflow-x: auto;
+  }
+
+  .formula-box code {
+    color: var(--accent-cyan);
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 900px) {
+    .theory-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: string;
+}
+
+const {
+  title = 'Four-Stroke Engine Simulator - 3D Interactive Mechanical IC Engine Laboratory',
+  description = 'Professional interactive Four-Stroke Petrol Engine Simulator with real-time Three.js 3D mechanics, crank-slider kinematics, P-V diagrams, valve timing, and engineering theory.',
+  lang = 'en',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://engine-simulator.engineering');
+---
+
+<!doctype html>
+<html lang={lang} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content="Four Stroke Engine Simulator, 4 Stroke Engine Simulator, Four Stroke Petrol Engine Simulator, Four Stroke Engine Working Model, Four Stroke Engine Animation, Four Stroke Engine Working Principle, Internal Combustion Engine Simulator, Four Stroke Engine 3D Model, Petrol Engine Working Animation, Four Stroke Engine Diagram, Four Stroke Engine Parts and Functions, Crank-slider kinematics, Otto cycle simulation" />
+    <meta name="author" content="Engineering Simulator Group" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Four-Stroke Engine Simulator" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD Structured Data: WebApplication & LearningResource -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Four-Stroke Engine Simulator",
+        "description": "Professional Interactive Virtual Mechanical Engineering Laboratory for Four-Stroke Internal Combustion Petrol Engines.",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "All modern browsers (WebGL supported)",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "educationalUse": "Instruction, Simulation, Demonstration, Virtual Laboratory",
+        "learningResourceType": "Simulation",
+        "audience": {
+          "@type": "EducationalAudience",
+          "educationalRole": "student"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <Header currentLang={lang} />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+

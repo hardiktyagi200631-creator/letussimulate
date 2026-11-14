@@ -1,0 +1,35 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import ComparisonSection from '../components/ComparisonSection.astro';
+---
+
+<MainLayout
+  title="Petrol vs Diesel Engine Comparison - Spark vs Compression Ignition"
+  description="Exhaustive engineering comparison between 4-stroke Petrol (Spark Ignition) and Diesel (Compression Ignition) engines covering compression ratios, thermal efficiency, injection, and pressure."
+>
+  <div class="container page-header">
+    <div class="breadcrumb">
+      <a href="/">Home</a> / <span>Comparison</span>
+    </div>
+    <h1 style="margin-top: 0.5rem;">Petrol Engine vs Diesel Engine: Engineering Comparison</h1>
+    <p style="color: var(--text-muted); max-width: 720px; margin-top: 0.5rem;">
+      Analyzing thermodynamic cycles, ignition mechanisms, combustion dynamics, and operational trade-offs.
+    </p>
+  </div>
+
+  <ComparisonSection />
+</MainLayout>
+
+<style>
+  .page-header {
+    padding: 2.5rem 1.25rem 0.5rem;
+  }
+  .breadcrumb {
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .breadcrumb a {
+    color: var(--accent-cyan);
+  }
+</style>
+

@@ -1,0 +1,237 @@
+---
+---
+
+<section id="error-analysis" class="error-analysis-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="badge badge-exhaust">Engineering Reality</span>
+      <h2>Engine Simulation: Ideal Model vs Real-World Engine</h2>
+      <p class="section-subtitle">
+        Understanding physical energy losses, real-gas thermodynamic departures, and the mechanical limits of simplified models.
+      </p>
+    </div>
+
+    <div class="grid-2" style="margin-bottom: 2rem;">
+      <div class="eng-card">
+        <h3 class="card-subtitle" style="color: var(--accent-amber);">Primary Real-World Energy Losses</h3>
+        <ul class="loss-list">
+          <li>
+            <strong>1. Heat Losses to Coolant & Oil (~25%–30%):</strong>
+            High-temperature combustion gases transfer substantial thermal energy into the cylinder wall, head, and piston crown via convection and radiation.
+          </li>
+          <li>
+            <strong>2. Exhaust Blowdown & Sensible Heat Loss (~30%–35%):</strong>
+            Because the exhaust valve opens 40°–50° before BDC, expanding gases are released before their energy can be completely extracted mechanically.
+          </li>
+          <li>
+            <strong>3. Pumping Losses (Gas Exchange Loop):</strong>
+            Drawing the air-fuel mixture past the throttle valve and forcing burnt gases out through the exhaust runner requires mechanical work, creating a negative lower loop on the indicator diagram.
+          </li>
+          <li>
+            <strong>4. Mechanical Friction & Bearing Drag (~12%–18% of Indicated Work):</strong>
+            Friction between piston rings and cylinder liner, journal bearings, valve spring actuation, and auxiliary drives converts useful mechanical work into friction heat ($P_b = P_i - P_f$).
+          </li>
+          <li>
+            <strong>5. Finite Combustion Duration & Real Gas Properties:</strong>
+            Unlike the ideal air-standard Otto cycle assumption of instantaneous constant-volume heat addition, realistic combustion takes 20°–35° of crank rotation, causing rounded peak pressure curves.
+          </li>
+        </ul>
+      </div>
+
+      <div class="eng-card">
+        <h3 class="card-subtitle" style="color: var(--accent-cyan);">Simulator Scope & Engineering Boundaries</h3>
+        <div class="disclaimer-content">
+          <p>
+            <strong>Educational Simulation Model Notice:</strong><br />
+            This virtual simulator models exact kinematic crank-slider trigonometric motion (x, v, a) and illustrates thermodynamic behavior using closed-cylinder polytropic relations (P &middot; V^n = constant).
+          </p>
+          <p>
+            While accurate for pedagogical demonstration of IC engine operation, it does not replace 3D Computational Fluid Dynamics (CFD) in-cylinder combustion software (such as CONVERGE or ANSYS Forte) or dynamometer engine test-bench measurements.
+          </p>
+          <div class="assumptions-box">
+            <span class="assump-title">Active Model Assumptions:</span>
+            <ul>
+              <li>Polytropic exponents: nc = 1.34 (compression), ne = 1.28 (expansion).</li>
+              <li>Atmospheric reference: P0 = 1.013 bar, T0 = 298.15 K.</li>
+              <li>Constant indicated mean effective pressure: IMEP = 8.5 bar.</li>
+              <li>Mechanical friction efficiency: &eta;m = 84%.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The 8 Common Engineering Misconceptions -->
+    <div class="eng-card">
+      <div class="eng-card-header">
+        <span class="eng-card-title">Addressing 8 Crucial Mechanical Engineering Questions</span>
+        <span class="badge badge-power">Core Concepts</span>
+      </div>
+
+      <div class="qa-grid">
+        <div class="qa-item">
+          <h4 class="qa-q">1. Why does one complete cycle require two crankshaft revolutions?</h4>
+          <p class="qa-a">
+            Each stroke of the piston moves from one dead centre to the other, which rotates the crankshaft through 180° (half a revolution). Since there are four required thermodynamic processes (Intake, Compression, Power, Exhaust), $4 \times 180^\circ = 720^\circ$, requiring exactly two full revolutions.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h4 class="qa-q">2. Why does the camshaft rotate at half crankshaft speed?</h4>
+          <p class="qa-a">
+            Each valve only needs to open once during the entire 720° cycle. If the camshaft ran at crank speed, valves would open twice as often, ruining the compression and power strokes. Hence, N_cam = N_crank / 2.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h4 class="qa-q">3. Why is only the power stroke responsible for positive work in the idealized cycle?</h4>
+          <p class="qa-a">
+            During power (expansion), high gas pressure pushes the piston down in the direction of its displacement (W = &int; P dV &gt; 0). During intake and exhaust, work is negligible or negative (pumping), and during compression work is done on the gas (W &lt; 0).
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h4 class="qa-q">4. Why is a heavy flywheel essential in a single-cylinder engine?</h4>
+          <p class="qa-a">
+            Because torque delivery occurs only during the 180° power stroke, the engine would violently decelerate and stall during the other 540° of non-power strokes. The flywheel stores rotational kinetic energy ($E_k = \frac{1}{2} I \omega^2$) and keeps the crank turning smoothly.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h4 class="qa-q">5. Why must both valves remain closed during compression?</h4>
+          <p class="qa-a">
+            To create a hermetically sealed chamber. Any valve leakage during compression would bleed away air-fuel charge, preventing pressure buildup and dramatically slashing combustion efficiency and power.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h4 class="qa-q">6. Why is ignition initiated before TDC (BTDC)?</h4>
+          <p class="qa-a">
+            Combustion is a chemical chain reaction that takes approximately 1 to 2 milliseconds to fully engulf the mixture. Firing the spark 15°–25° before TDC allows peak pressure to peak just as the piston begins descending (~10°–15° ATDC).
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h4 class="qa-q">7. Why do real engines have valve overlap around TDC?</h4>
+          <p class="qa-a">
+            Gas possesses physical inertia. The high-speed outflow of exhaust gas creates a low-pressure depression behind it that draws in the incoming fresh charge (scavenging), increasing volumetric efficiency at higher RPM.
+          </p>
+        </div>
+
+        <div class="qa-item">
+          <h4 class="qa-q">8. Why is actual engine efficiency lower than the ideal Otto cycle?</h4>
+          <p class="qa-a">
+            The ideal Otto cycle assumes reversible isentropic processes, instantaneous combustion, air with constant specific heats, and zero friction or heat loss. In reality, heat dissipation, friction, pumping work, and dissociation limit real brake efficiency to ~28%–35%.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .error-analysis-section {
+    padding: 3rem 0;
+  }
+
+  .section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .section-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 720px;
+    margin: 0.5rem auto 0;
+  }
+
+  .card-subtitle {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .loss-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .loss-list strong {
+    color: var(--text-main);
+  }
+
+  .disclaimer-content {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .assumptions-box {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+  }
+
+  .assump-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .assumptions-box ul {
+    list-style: square inside;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+  }
+
+  .qa-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    margin-top: 1rem;
+  }
+
+  .qa-item {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .qa-q {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    line-height: 1.4;
+  }
+
+  .qa-a {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  @media (max-width: 900px) {
+    .qa-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+

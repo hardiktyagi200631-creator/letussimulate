@@ -1,0 +1,193 @@
+---
+import { LANGUAGES } from '../i18n/translations';
+
+interface Props {
+  currentLang?: string;
+}
+
+const { currentLang = 'en' } = Astro.props;
+---
+
+<header class="header">
+  <div class="container header-inner">
+    <a href="/#simulator" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="3" width="16" height="12" rx="2"></rect>
+          <path d="M8 7h8"></path>
+          <path d="M12 15v5"></path>
+          <circle cx="12" cy="20" r="2"></circle>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-title">ENGINE SIMULATOR</span>
+        <span class="logo-sub">IC Petrol 4-Stroke Lab</span>
+      </div>
+    </a>
+
+    <nav class="nav" aria-label="Main Navigation">
+      <a href="/#simulator" class="nav-link" data-i18n="nav_simulator">Simulator</a>
+      <a href="/#stroke-analysis" class="nav-link" data-i18n="nav_diagrams">Analysis</a>
+      <a href="/#theory" class="nav-link" data-i18n="nav_theory">Theory</a>
+      <a href="/#components" class="nav-link" data-i18n="nav_components">Components</a>
+      <a href="/#comparison" class="nav-link" data-i18n="nav_comparison">Petrol vs Diesel</a>
+      <a href="/#error-analysis" class="nav-link">Real vs Ideal</a>
+      <a href="/#quiz" class="nav-link nav-highlight" data-i18n="nav_quiz">Quiz</a>
+    </nav>
+
+    <div class="header-actions">
+      <!-- Language Selector -->
+      <div class="lang-selector-wrapper">
+        <svg class="lang-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+          <path d="M2 12h20"></path>
+        </svg>
+        <select id="language-select" class="lang-select" aria-label="Select Language">
+          {LANGUAGES.map((lang) => (
+            <option value={lang.code} selected={lang.code === currentLang} dir={lang.dir}>
+              {lang.nativeName} ({lang.name})
+            </option>
+          ))}
+        </select>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(9, 13, 22, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    height: 64px;
+    display: flex;
+    align-items: center;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    color: var(--text-main);
+  }
+
+  .logo:hover {
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 38px;
+    height: 38px;
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(59, 130, 246, 0.3));
+    border: 1px solid var(--accent-cyan);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-cyan);
+  }
+
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .logo-title {
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    color: var(--text-main);
+  }
+
+  .logo-sub {
+    font-size: 0.7rem;
+    color: var(--accent-cyan);
+    font-family: var(--font-mono);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-main);
+    text-decoration: none;
+  }
+
+  .nav-highlight {
+    background: var(--accent-cyan-dim);
+    color: var(--accent-cyan);
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(56, 189, 248, 0.3);
+  }
+
+  .nav-highlight:hover {
+    background: rgba(56, 189, 248, 0.25);
+    color: #fff;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .lang-selector-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    padding: 0.25rem 0.5rem;
+    gap: 0.35rem;
+  }
+
+  .lang-icon {
+    color: var(--text-muted);
+  }
+
+  .lang-select {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-size: 0.82rem;
+    cursor: pointer;
+    outline: none;
+    font-family: var(--font-sans);
+  }
+
+  .lang-select option {
+    background: var(--bg-secondary);
+    color: var(--text-main);
+  }
+
+  @media (max-width: 900px) {
+    .nav {
+      display: none; /* Mobile menu can be toggled or responsive */
+    }
+  }
+</style>
+

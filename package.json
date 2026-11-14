@@ -1,0 +1,19 @@
+{
+  "name": "engine-simulator",
+  "version": "1.0.0",
+  "description": "Professional Interactive Four-Stroke Petrol Engine Simulator with Astro.js, Three.js, and TypeScript",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@types/three": "^0.187.0",
+    "astro": "^4.16.18",
+    "three": "^0.187.0",
+    "typescript": "^7.0.2",
+    "vitest": "^5.1.0"
+  }
+}

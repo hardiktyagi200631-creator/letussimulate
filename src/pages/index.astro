@@ -1,0 +1,147 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import EngineViewer from '../components/EngineViewer.astro';
+import SimulationControls from '../components/SimulationControls.astro';
+import StrokeIndicator from '../components/StrokeIndicator.astro';
+import EngineParameters from '../components/EngineParameters.astro';
+import ComponentInspector from '../components/ComponentInspector.astro';
+import PVDiagram from '../components/PVDiagram.astro';
+import ValveTimingDiagram from '../components/ValveTimingDiagram.astro';
+import ComparisonSection from '../components/ComparisonSection.astro';
+import TheorySection from '../components/TheorySection.astro';
+import ErrorAnalysisSection from '../components/ErrorAnalysisSection.astro';
+import QuizSection from '../components/QuizSection.astro';
+---
+
+<MainLayout>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-content">
+      <div class="hero-badge-row">
+        <span class="badge badge-intake">Single Cylinder SI Engine</span>
+        <span class="badge badge-power">Analytical Crank-Slider</span>
+        <span class="badge badge-compression">720° Four-Stroke Cycle</span>
+        <span class="badge badge-exhaust">Astro + Three.js</span>
+      </div>
+      <h1 class="hero-title" data-i18n="title">Four-Stroke Engine Simulator</h1>
+      <p class="hero-subtitle" data-i18n="subtitle">
+        Explore the working principle of a four-stroke petrol engine through an interactive 3D mechanical simulation.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Simulator Workbench -->
+  <section id="simulator" class="simulator-workbench">
+    <div class="container workbench-container">
+      <div class="workbench-main">
+        <!-- 3D Three.js Interactive Engine Viewer -->
+        <EngineViewer />
+
+        <!-- Playback and Engine Speed Controls -->
+        <SimulationControls />
+
+        <!-- 720° Four-Stroke Cycle Timeline & Dynamic Status -->
+        <StrokeIndicator />
+
+        <!-- Live Computed Parameters & Telemetry -->
+        <EngineParameters />
+      </div>
+
+      <!-- Component Inspector & Exploded View Details -->
+      <div id="components" class="workbench-sub">
+        <ComponentInspector />
+      </div>
+
+      <!-- Real-Time Engineering Diagrams -->
+      <div id="stroke-analysis" class="workbench-diagrams grid-2">
+        <div id="pv-diagram">
+          <PVDiagram />
+        </div>
+        <div id="valve-diagram">
+          <ValveTimingDiagram />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- In-Depth Engineering Theory Syllabus -->
+  <TheorySection />
+
+  <!-- Petrol vs Diesel Comparison -->
+  <ComparisonSection />
+
+  <!-- Ideal vs Real-World Error Analysis -->
+  <ErrorAnalysisSection />
+
+  <!-- Interactive Knowledge & Stroke Identification Quiz -->
+  <QuizSection />
+</MainLayout>
+
+<!-- Hydrate the Client Engine Application -->
+<script>
+  import '../scripts/client-app';
+</script>
+
+<style>
+  .hero-section {
+    padding: 2.5rem 0 1.5rem;
+    background: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 70%);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .hero-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .hero-title {
+    color: var(--text-main);
+  }
+
+  .hero-subtitle {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 760px;
+    line-height: 1.5;
+  }
+
+  .simulator-workbench {
+    padding: 2rem 0;
+  }
+
+  .workbench-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .workbench-main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .workbench-diagrams {
+    margin-top: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 1.75rem 0 1rem;
+    }
+    .simulator-workbench {
+      padding: 1rem 0;
+    }
+  }
+</style>
+

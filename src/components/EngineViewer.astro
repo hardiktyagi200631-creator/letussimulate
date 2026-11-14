@@ -1,0 +1,206 @@
+---
+---
+
+<div class="viewer-wrapper eng-card">
+  <div class="viewer-toolbar">
+    <div class="toolbar-group">
+      <span class="toolbar-label">Camera:</span>
+      <button class="btn btn-outline btn-sm camera-btn active" data-view="isometric" title="Isometric View">Iso</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="front" title="Front View (Crank-Slider Plane)">Front</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="side" title="Side View">Side</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="top" title="Top View (Valves/Cylinder Head)">Top</button>
+      <button class="btn btn-outline btn-sm camera-btn" data-view="reset" title="Reset Camera Position">Reset</button>
+    </div>
+
+    <div class="toolbar-group">
+      <span class="toolbar-label">Inspection:</span>
+      <button id="btn-toggle-transparent" class="btn btn-outline btn-sm" title="Toggle Transparent Engine Block">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+        Transparent
+      </button>
+
+      <div class="slider-control" title="Exploded Assembly View">
+        <label for="exploded-slider" class="slider-label">Explode:</label>
+        <input type="range" id="exploded-slider" min="0" max="100" value="0" class="eng-range" />
+        <span id="exploded-val" class="slider-val">0%</span>
+      </div>
+
+      <button id="btn-fullscreen" class="btn btn-outline btn-sm" title="Toggle Fullscreen">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="webgl-container" class="webgl-canvas-container">
+    <div id="loading-overlay" class="loading-overlay">
+      <div class="spinner"></div>
+      <p class="loading-text">Initializing 3D Mechanical Assembly...</p>
+    </div>
+
+    <div id="webgl-error" class="webgl-error" style="display: none;">
+      <h4>WebGL Not Supported</h4>
+      <p>Your browser does not support WebGL hardware acceleration. The mathematical calculations and theory remain fully functional below.</p>
+    </div>
+
+    <div class="viewer-hint">
+      <span>Drag: Rotate • Right-Click: Pan • Scroll: Zoom • Click Component: Inspect</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  .viewer-wrapper {
+    padding: 0;
+    position: relative;
+    background: #090d16;
+  }
+
+  .viewer-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(15, 23, 42, 0.95);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .toolbar-label {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-right: 0.25rem;
+  }
+
+  .btn-sm {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.78rem;
+  }
+
+  .slider-control {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--bg-surface);
+    padding: 0.25rem 0.55rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
+  }
+
+  .slider-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .eng-range {
+    width: 80px;
+    height: 4px;
+    accent-color: var(--accent-cyan);
+    cursor: pointer;
+  }
+
+  .slider-val {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--accent-cyan);
+    min-width: 28px;
+  }
+
+  .webgl-canvas-container {
+    width: 100%;
+    height: 520px;
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+  }
+
+  .webgl-canvas-container:active {
+    cursor: grabbing;
+  }
+
+  .loading-overlay {
+    position: absolute;
+    inset: 0;
+    background: #090d16;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    z-index: 10;
+    transition: opacity 0.3s ease;
+  }
+
+  .spinner {
+    width: 38px;
+    height: 38px;
+    border: 3px solid rgba(56, 189, 248, 0.2);
+    border-top-color: var(--accent-cyan);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .loading-text {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+  }
+
+  .viewer-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 14px;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(4px);
+    border: 1px solid var(--border-subtle);
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    pointer-events: none;
+    font-family: var(--font-mono);
+  }
+
+  .webgl-error {
+    position: absolute;
+    inset: 0;
+    background: #090d16;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .webgl-error h4 {
+    color: var(--accent-red);
+    margin-bottom: 0.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .webgl-canvas-container {
+      height: 380px;
+    }
+  }
+</style>
+
